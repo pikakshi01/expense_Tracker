@@ -5,12 +5,14 @@
   --secondary: #FFA07A;
   --hover: #3a0066;
   --table-header: #e5d4f5;
+  --table-bg: #ffffff;
+  --table-text: #333333;
   --button-text: #fff;
   --converter-bg: #ffffff;
   --converter-border: var(--primary);
 }
 
-/* 🎨 Themes */
+/* 🎨 Dark Theme */
 body[data-theme="dark"] {
   --bg-color: #1e1e2f;
   --text-color: #f2f2f2;
@@ -18,10 +20,13 @@ body[data-theme="dark"] {
   --secondary: #9b59b6;
   --hover: #6f2c91;
   --table-header: #3c3c4e;
+  --table-bg: #2c2c3a;
+  --table-text: #f2f2f2;
   --button-text: #fff;
   --converter-bg: #2e2e40;
 }
 
+/* 🎨 Blue Theme */
 body[data-theme="blue"] {
   --bg-color: #e6f0ff;
   --text-color: #333;
@@ -29,10 +34,13 @@ body[data-theme="blue"] {
   --secondary: #6495ed;
   --hover: #155fbd;
   --table-header: #bcdcff;
+  --table-bg: #ffffff;
+  --table-text: #000000;
   --button-text: #fff;
   --converter-bg: #ffffff;
 }
 
+/* 🎨 Mint Theme */
 body[data-theme="mint"] {
   --bg-color: #e0f7f1;
   --text-color: #2c3e50;
@@ -40,10 +48,13 @@ body[data-theme="mint"] {
   --secondary: #2ecc71;
   --hover: #1e8c4a;
   --table-header: #b6f0d4;
+  --table-bg: #ffffff;
+  --table-text: #2c3e50;
   --button-text: #fff;
   --converter-bg: #ffffff;
 }
 
+/* 🌐 Base Styles */
 body {
   font-family: Arial, sans-serif;
   background: var(--bg-color);
@@ -85,11 +96,13 @@ button:hover {
   margin: 5px 0;
 }
 
+/* 📊 Table Styling */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
-  background: white;
+  background: var(--table-bg);
+  color: var(--table-text);
 }
 
 th {
@@ -101,6 +114,7 @@ th, td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
+  color: var(--table-text);
 }
 
 td button {
@@ -112,7 +126,11 @@ td button {
   border-radius: 3px;
 }
 
-/* Converter Box */
+table tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* 💱 Converter Box */
 .converter-box {
   position: fixed;
   top: 100px;
@@ -154,7 +172,7 @@ td button {
   color: var(--primary);
 }
 
-/* Responsive */
+/* 📱 Responsive */
 @media (max-width: 768px) {
   .converter-box {
     position: static;
