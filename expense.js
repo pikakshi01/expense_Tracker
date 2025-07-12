@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
   themeSelect.value = savedTheme;
   toggleSwitch.checked = (savedTheme === "dark");
 
-  // Dropdown theme change
   themeSelect.addEventListener("change", () => {
     const selected = themeSelect.value;
     document.body.setAttribute("data-theme", selected);
@@ -34,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleSwitch.checked = (selected === "dark");
   });
 
-  // Toggle switch change
   toggleSwitch.addEventListener("change", () => {
     const isDark = toggleSwitch.checked;
     const theme = isDark ? "dark" : "light";
@@ -67,12 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const to = toDate.value;
     const min = parseFloat(minAmount.value) || 0;
 
-    return expenses.filter(exp => {
-      const dateOk = (!from || exp.date >= from) && (!to || exp.date <= to);
-      const catOk = !category || exp.category === category;
-      const amtOk = parseFloat(exp.amount) >= min;
-      return dateOk && catOk && amtOk;
-    });
+    return expenses
+      .map((exp, index) => ({ ...exp, index })) // attach original index for deletion
+      .filter(exp => {
+        const dateOk = (!from || exp.date >= from) && (!to || exp.date <= to);
+        const catOk = !category || exp.category === category;
+        const amtOk = parseFloat(exp.amount) >= min;
+        return dateOk && catOk && amtOk;
+      });
   }
 
   function calculateStats(filtered) {
@@ -95,14 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderExpenses() {
     const filtered = applyFilters();
     tableBody.innerHTML = "";
-    filtered.forEach((exp, index) => {
+    filtered.forEach((exp) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${exp.date}</td>
         <td>${currentCurrency}${exp.amount}</td>
         <td>${exp.category}</td>
         <td>${exp.description}</td>
-        <td><button onclick="deleteExpense(${index})">X</button></td>
+        <td><button onclick="deleteExpense(${exp.index})">X</button></td>
       `;
       tableBody.appendChild(row);
     });
@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 
-  window.deleteExpense = function (index) {
-    expenses.splice(index, 1);
+  window.deleteExpense = function (originalIndex) {
+    expenses.splice(originalIndex, 1);
     saveExpenses();
     updateCategoryFilter();
     renderExpenses();
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("apply-filters").addEventListener("click", renderExpenses);
 
-  document.getElementById("currency").addEventListener("change", (e) => {
+  currencySymbol.addEventListener("change", (e) => {
     currentCurrency = e.target.value;
     renderExpenses();
   });
