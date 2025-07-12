@@ -1,0 +1,165 @@
+:root {
+  --bg-color: #f4f0fa;
+  --text-color: #333;
+  --primary: #4B0082;
+  --secondary: #FFA07A;
+  --hover: #3a0066;
+  --table-header: #e5d4f5;
+  --button-text: #fff;
+  --converter-bg: #ffffff;
+  --converter-border: var(--primary);
+}
+
+/* 🎨 Themes */
+body[data-theme="dark"] {
+  --bg-color: #1e1e2f;
+  --text-color: #f2f2f2;
+  --primary: #8e44ad;
+  --secondary: #9b59b6;
+  --hover: #6f2c91;
+  --table-header: #3c3c4e;
+  --button-text: #fff;
+  --converter-bg: #2e2e40;
+}
+
+body[data-theme="blue"] {
+  --bg-color: #e6f0ff;
+  --text-color: #333;
+  --primary: #1e90ff;
+  --secondary: #6495ed;
+  --hover: #155fbd;
+  --table-header: #bcdcff;
+  --button-text: #fff;
+  --converter-bg: #ffffff;
+}
+
+body[data-theme="mint"] {
+  --bg-color: #e0f7f1;
+  --text-color: #2c3e50;
+  --primary: #27ae60;
+  --secondary: #2ecc71;
+  --hover: #1e8c4a;
+  --table-header: #b6f0d4;
+  --button-text: #fff;
+  --converter-bg: #ffffff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 30px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1, h2 {
+  color: var(--primary);
+}
+
+form, #filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, select, button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background: var(--primary);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--hover);
+}
+
+#stats p {
+  margin: 5px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: white;
+}
+
+th {
+  background: var(--table-header);
+  color: var(--primary);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+td button {
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+/* Converter Box */
+.converter-box {
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  background: var(--converter-bg);
+  padding: 20px;
+  border-radius: 10px;
+  width: 230px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  z-index: 1000;
+  border: 2px solid var(--converter-border);
+}
+
+.converter-box h3 {
+  margin-top: 0;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.converter-box input,
+.converter-box select {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.converter-box button {
+  width: 100%;
+  background-color: var(--secondary);
+  color: var(--button-text);
+}
+
+.converter-box button:hover {
+  background-color: var(--hover);
+}
+
+#conversion-result {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .converter-box {
+    position: static;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+}
